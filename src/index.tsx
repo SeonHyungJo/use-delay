@@ -1,23 +1,55 @@
-import * as React from 'react';
+import { useCallback, useEffect, useState } from "react";
 
-export const useMyHook = () => {
-  let [{
-    counter
-  }, setState] = React.useState<{
-    counter: number;
-  }>({
-    counter: 0
-  });
+export interface DelayOptions {
+  second: number;
+  onAction: Function;
+}
 
-  React.useEffect(() => {
-    let interval = window.setInterval(() => {
-      counter++;
-      setState({counter})
-    }, 1000)
-    return () => {
-      window.clearInterval(interval);
-    };
+export const useThrottle = (second: number, onAction: Function) => {
+  const [flag, setFlag] = useState(false);
+
+  const onThrottle = useCallback(() => {
+    if(!flag){
+      setFlag(true);
+    }
   }, []);
 
-  return counter;
+  useEffect(() => {
+    if (flag) {
+      const timer = setTimeout(() => {
+        onAction();
+        setFlag(false);
+      }, second);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    return;
+  }, [flag]);
+
+  return onThrottle;
+};
+
+export const useDebounds = (second: number, onAction: Function) => {
+  const [flag, setFlag] = useState(0);
+
+  const onDebounds = useCallback(() => {
+    setFlag(Math.random());
+  }, []);
+
+  useEffect(() => {
+    if (flag !== 0) {
+      const timer = setTimeout(() => {
+        onAction();
+      }, second);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    return;
+  }, [flag]);
+
+  return onDebounds;
 };
