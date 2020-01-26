@@ -1,10 +1,13 @@
 {
   "name": "use-delay",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "2 easy delay hooks (throttle, debounds)",
   "author": "snyung",
   "license": "MIT",
-  "repository": "SeonHyungJo/use-delay",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeonHyungJo/use-delay.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -44,5 +47,19 @@
     "rollup-plugin-typescript2": "0.25.3",
     "rollup-plugin-url": "3.0.1",
     "typescript": "^3.2.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/SeonHyungJo/use-delay/issues"
+  },
+  "homepage": "http://github.com/SeonHyungJo/use-delay/",
+  "directories": {
+    "example": "example"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "throttle",
+    "debounds",
+    "delay"
+  ]
 }
